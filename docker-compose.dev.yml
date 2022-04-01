@@ -1,0 +1,127 @@
+version: "3.5"
+services:
+  keycloak:
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: root
+      KEYCLOAK_IMPORT: /tmp/realms/artcoded-realm.json
+    ports:
+      - 8080:8080
+    networks:
+      artcoded:
+        aliases:
+          - auth.somehost.org
+    volumes:
+     # - ./keycloak/realms/export:/tmp/export
+       - ./config/keycloak-dev:/tmp/realms
+  api-backend:
+    image: artcoded/api-backend:latest
+    ports:
+      - 9000:80
+    links:
+      - greenmail
+    networks:
+      artcoded:
+        aliases:
+          - api.somehost.org
+    environment:
+      CAMEL_MAIL_IMAP_USERNAME: "fee@somehost.com"
+      CAMEL_MAIL_IMAP_PASSWORD: "fee"
+      CAMEL_MAIL_IMAP_SSL: "false"
+      CAMEL_MAIL_IMAP_HOST: "greenmail.somehost.org"
+      CAMEL_MAIL_IMAP_PROTOCOL: imap
+      CAMEL_MAIL_IMAP_PORT: 143
+      MAIL_SENDER_USERNAME: "noreply@somehost.com"
+      MAIL_SENDER_PASSWORD: "noreply"
+      MAIL_SENDER_SERVER: "greenmail.somehost.org"
+      MAILE_SENDER_SSL_ENABLE: "false"
+      MAIL_SENDER_PORT: 25
+      MONGO_DB_DATABASE_NAME: artcoded_test
+      JWK_SET_URI: http://auth.somehost.org:8080/auth/realms/Artcoded/protocol/openid-connect/certs
+  back-office:
+    image: artcoded/back-office:latest
+    networks:
+      artcoded:
+        aliases:
+          - backoffice.somehost.org
+    environment:
+      KEYCLOAK_URL: "https://auth.somehost.org"
+      KEYCLOAK_REALM: "Artcoded"
+      KEYCLOAK_CLIENT_ID: "frontend-client"
+      BACKEND_URL: "https://backoffice.somehost.org"
+      SPARQL_ENDPOINT: "https://backoffice.somehost.org/sparql"
+      FRONTEND_URL: "https://somehost.org"
+  website:
+    image: artcoded/website:latest
+    networks:
+      artcoded:
+        aliases:
+          - somehost.org
+    environment:
+      BACKEND_URL: "https://somehost.org"
+      SPARQL_ENDPOINT: "https://somehost.org/sparql"
+      SERVER_BACKEND_URL: "http://somehost.org"
+      ENV_TYPE: "TEST"
+  mongo:
+    ports:
+      - 27018:27017
+  artemis:
+    ports:
+      - 8161:8161
+      - 61616:61616
+  redis:
+    ports:
+      - "6379:6379"
+  api-gateway:
+    image: artcoded/api-gateway:latest
+    ports:
+      - "80:80"
+    environment:
+      GATEWAY_CONFIG_FILE: /usr/config/gateway-dev.yml
+  mongo-express:
+    ports:
+      - 8081:8081
+  tlsproxy:
+    image: caddy:2
+    networks:
+      artcoded:
+    ports:
+      - "443:443"
+    environment:
+      API_ADDRESS: "api.somehost.org"
+      BACK_OFFICE_ADDRESS: "backoffice.somehost.org"
+      WEBSITE_ADDRESS: "somehost.org"
+      AUTH_ADDRESS: "auth.somehost.org"
+    volumes:
+      - ./config/tlsproxy/Caddyfile:/etc/caddy/Caddyfile
+
+  triplestore:
+    image: artcoded/triplestore:latest
+    ports:
+      - 8888:80
+
+  prometheus:
+    user: "1000"
+    restart: "no"
+    volumes:
+      - ./config/prometheus/prometheus_dev.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+  grafana:
+    user: "1000"
+    restart: "no"
+    ports:
+      - 3000:3000
+  greenmail:
+    image: greenmail/standalone:1.6.7
+    restart: always
+    networks:
+      artcoded:
+        aliases:
+          - greenmail.somehost.org
+    environment:
+      GREENMAIL_OPTS: '-Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users.login=email -Dgreenmail.setup.all -Dgreenmail.users=fee:fee@somehost.com,noreply:noreply@somehost.com' 
+    ports:
+      - "8996:8080"
+networks:
+  artcoded:

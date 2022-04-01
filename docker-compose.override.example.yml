@@ -1,0 +1,99 @@
+version: '3.5'
+services:
+  mongo:
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: artcoded
+      MONGO_INITDB_ROOT_PASSWORD: "@@MONGO_PASSWORD@@"
+  mongo-express:
+    restart: unless-stopped
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_AUTH_USERNAME: artcoded
+      ME_CONFIG_MONGODB_AUTH_PASSWORD: "@@MONGO_PASSWORD@@"
+      ME_CONFIG_MONGODB_URL: mongodb://artcoded:@@MONGO_PASSWORD@@@mongo:27017/
+  api-backend:
+    networks:
+      artcoded:
+        aliases:
+          - api.bittich.be
+    environment:
+      CAMEL_MAIL_IMAP_USERNAME: "@@EXPANSES_EMAIL_ADDRESS@@"
+      CAMEL_MAIL_IMAP_PASSWORD: "@@EXPANSES_EMAIL_PASSWORD@@"
+      MAIL_SENDER_USERNAME: "@@NOTIFICATION_EMAIL_ADDRESS@@"
+      MAIL_SENDER_PASSWORD: "@@NOTIFICATION_EMAIL_PASSWORD@@"
+      MONGO_DB_DATABASE_NAME: "artcoded"
+      MONGO_DB_PASSWORD: "@@MONGO_PASSWORD@@"
+      MONGO_DB_USERNAME: artcoded
+      ARTEMIS_USER: artemis
+      ARTEMIS_PASSWORD: "@@ARTEMIS_PASSWORD@@"
+      JWK_SET_URI: http://keycloak:8080/auth/realms/Artcoded/protocol/openid-connect/certs
+  back-office:
+    networks:
+      artcoded:
+        aliases:
+          - backoffice.bittich.be
+    environment:
+      KEYCLOAK_URL: "https://auth.bittich.be"
+      KEYCLOAK_REALM: "Artcoded"
+      KEYCLOAK_CLIENT_ID: "frontend-client"
+      BACKEND_URL: "https://backoffice.bittich.be"
+      FRONTEND_URL: "https://bittich.be"
+      ENV_TYPE: "PROD"
+
+  website:
+    networks:
+      artcoded:
+        aliases:
+          - bittich.be
+    environment:
+      BACKEND_URL: "https://bittich.be"
+      SERVER_BACKEND_URL: "http://bittich.be"
+      ENV_TYPE: "PROD"
+  api-gateway:
+    environment:
+      GATEWAY_CONFIG_FILE: /usr/config/gateway-prod.yml
+  postgresql:
+    environment:
+      ALLOW_EMPTY_PASSWORD: 'yes'
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: "@@POSTGRES_PASSWORD@@"
+      POSTGRES_DB: keycloak
+  keycloak: 
+    networks:
+      artcoded:
+        aliases:
+          - auth.bittich.be
+    environment:  
+      KEYCLOAK_USER: admin  
+      KEYCLOAK_PASSWORD: "@@KEYCLOAK_PASSWORD@@"
+      DB_PASSWORD: "@@POSTGRES_PASSWORD@@"
+      DB_ADDR: postgresql
+  artemis:
+    environment:
+      ARTEMIS_USER: artemis
+      ARTEMIS_PASSWORD: "@@ARTEMIS_PASSWORD@@"
+  redis-express:
+    restart: unless-stopped
+    networks:
+      artcoded:
+    image: redislabs/redisinsight
+    ports:
+      - "8001:8001"
+  google-drive-sync:
+    image: artcoded/drive-sync
+    networks:
+      artcoded:
+    volumes:
+      - ./data/backend/dump:/var/artcoded/data
+      - ./data/drive-sync:/var/drive-sync/
+      - ./config/drive-sync:/usr/config
+    environment:
+      PATH_TO_SYNC: /var/artcoded/data
+      IDEM_POTENT_FILE_PATH: /var/drive-sync/idempot.dat
+      DRIVE_CREDENTIALS_FILE: /usr/config/artcoded-cred.json
+      DRIVE_SHARED_DIRECTORY: "v2022.artcoded-dump"
+      APPLICATION_NAME: "artcoded"
+      ARTEMIS_USER: artemis
+      ARTEMIS_URL: tcp://artemis:61616
+      ARTEMIS_PASSWORD: "@@ARTEMIS_PASSWORD@@"

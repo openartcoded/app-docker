@@ -1,0 +1,18 @@
+
+{$API_ADDRESS}:443 {
+  reverse_proxy api-gateway:80
+  tls internal
+
+}
+{$BACK_OFFICE_ADDRESS}:443 {
+  reverse_proxy api-gateway:80
+  tls internal
+}
+{$WEBSITE_ADDRESS}:443 {
+  reverse_proxy api-gateway:80
+  tls internal
+}
+{$AUTH_ADDRESS}:443 {
+  reverse_proxy api-gateway:80
+  tls internal
+}
