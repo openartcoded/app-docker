@@ -81,7 +81,7 @@ services:
     ports:
       - "8001:8001"
   google-drive-sync:
-    image: artcoded/drive-sync
+    image: nbittich/drive-sync
     networks:
       artcoded:
     volumes:
