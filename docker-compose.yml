@@ -68,7 +68,7 @@ services:
       ARTEMIS_PASSWORD: root
   ####### Api Gateway #######
   api-gateway:
-    image: artcoded/api-gateway:v2022.0.4
+    image: nbittich/api-gateway:v2022.0.4
     restart: always
     networks:
       artcoded:
@@ -79,7 +79,7 @@ services:
       SERVER_PORT: 80
   ####### Api Backend #######
   api-backend:
-    image: artcoded/api-backend:v2022.0.5
+    image: nbittich/api-backend:v2022.0.5
     restart: always
     networks:
       artcoded:
@@ -105,7 +105,7 @@ services:
       PROFILE_ACTIVE: prod
   ####### BACK OFFICE #######
   back-office:
-    image: artcoded/back-office:v2022.0.3
+    image: nbittich/back-office:v2022.0.3
     restart: always
     networks:
       artcoded:
@@ -118,7 +118,7 @@ services:
   triplestore:
     networks:
       artcoded:
-    image: artcoded/triplestore:v2022.0.6
+    image: nbittich/triplestore:v2022.0.6
     restart: always
     environment:
       DATA_DIR: /triplestore
@@ -139,7 +139,7 @@ services:
       - ./data/migrations:/migrations
   ####### Website #######
   website:
-    image: artcoded/website:v2022.0.4
+    image: nbittich/website:v2022.0.4
     restart: always
     networks:
       artcoded:

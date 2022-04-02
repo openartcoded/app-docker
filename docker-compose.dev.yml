@@ -15,7 +15,7 @@ services:
      # - ./keycloak/realms/export:/tmp/export
        - ./config/keycloak-dev:/tmp/realms
   api-backend:
-    image: artcoded/api-backend:latest
+    image: nbittich/api-backend:latest
     ports:
       - 9000:80
     links:
@@ -39,7 +39,7 @@ services:
       MONGO_DB_DATABASE_NAME: artcoded_test
       JWK_SET_URI: http://auth.somehost.org:8080/auth/realms/Artcoded/protocol/openid-connect/certs
   back-office:
-    image: artcoded/back-office:latest
+    image: nbittich/back-office:latest
     networks:
       artcoded:
         aliases:
@@ -52,7 +52,7 @@ services:
       SPARQL_ENDPOINT: "https://backoffice.somehost.org/sparql"
       FRONTEND_URL: "https://somehost.org"
   website:
-    image: artcoded/website:latest
+    image: nbittich/website:latest
     networks:
       artcoded:
         aliases:
@@ -73,7 +73,7 @@ services:
     ports:
       - "6379:6379"
   api-gateway:
-    image: artcoded/api-gateway:latest
+    image: nbittich/api-gateway:latest
     ports:
       - "80:80"
     environment:
@@ -96,7 +96,7 @@ services:
       - ./config/tlsproxy/Caddyfile:/etc/caddy/Caddyfile
 
   triplestore:
-    image: artcoded/triplestore:latest
+    image: nbittich/triplestore:latest
     ports:
       - 8888:80
 
