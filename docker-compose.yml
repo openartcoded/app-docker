@@ -139,7 +139,7 @@ services:
       - ./data/migrations:/migrations
   ####### Website #######
   website:
-    image: nbittich/website:v2022.0.4
+    image: nbittich/website:v2022.1.0
     restart: always
     networks:
       artcoded:
