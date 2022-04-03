@@ -68,7 +68,7 @@ services:
       ARTEMIS_PASSWORD: root
   ####### Api Gateway #######
   api-gateway:
-    image: nbittich/api-gateway:v2022.0.4
+    image: nbittich/api-gateway:2022.1.1
     restart: always
     networks:
       artcoded:
@@ -118,7 +118,7 @@ services:
   triplestore:
     networks:
       artcoded:
-    image: nbittich/triplestore:v2022.0.6
+    image: nbittich/triplestore:2022.1.0
     restart: always
     environment:
       DATA_DIR: /triplestore
