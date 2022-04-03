@@ -16,3 +16,7 @@
   reverse_proxy api-gateway:80
   tls internal
 }
+{$ROUNDCUBE_ADDRESS}:443 {
+  reverse_proxy roundcube:80
+  tls internal
+}

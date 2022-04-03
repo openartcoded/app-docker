@@ -92,6 +92,7 @@ services:
       BACK_OFFICE_ADDRESS: "backoffice.somehost.org"
       WEBSITE_ADDRESS: "somehost.org"
       AUTH_ADDRESS: "auth.somehost.org"
+      ROUNDCUBE_ADDRESS: "mail.somehost.org"
     volumes:
       - ./config/tlsproxy/Caddyfile:/etc/caddy/Caddyfile
 
@@ -123,5 +124,18 @@ services:
       GREENMAIL_OPTS: '-Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users.login=email -Dgreenmail.setup.all -Dgreenmail.users=fee:fee@somehost.com,noreply:noreply@somehost.com' 
     ports:
       - "8996:8080"
+  roundcube:
+    image: roundcube/roundcubemail:latest
+    depends_on:
+        - greenmail
+    networks:
+      artcoded:
+        aliases:
+          - mail.somehost.org
+    environment:
+        ROUNDCUBEMAIL_DEFAULT_HOST: greenmail
+        ROUNDCUBEMAIL_DEFAULT_PORT: 143
+        ROUNDCUBEMAIL_SMTP_SERVER: greenmail
+        ROUNDCUBEMAIL_SMTP_PORT: 25 
 networks:
   artcoded:
