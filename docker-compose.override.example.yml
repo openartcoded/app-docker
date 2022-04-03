@@ -76,7 +76,7 @@ services:
       ARTEMIS_USER: artemis
       ARTEMIS_PASSWORD: __ARTEMIS_PASSWORD__
   mongo-dump-sync:
-    image: nbittich/drive-sync:__DRIVE_SYNC_VERSION__
+    image: nbittich/drive-sync:2022.1.0
     networks:
       artcoded:
     volumes:
@@ -94,7 +94,7 @@ services:
       ARTEMIS_URL: tcp://artemis:61616
       ARTEMIS_PASSWORD: __ARTEMIS_PASSWORD__
   dossiers-dump-sync:
-    image: nbittich/drive-sync:__DRIVE_SYNC_VERSION__
+    image: nbittich/drive-sync:2022.1.0
     networks:
       artcoded:
     volumes:
