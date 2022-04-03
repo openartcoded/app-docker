@@ -105,7 +105,7 @@ services:
       PROFILE_ACTIVE: prod
   ####### BACK OFFICE #######
   back-office:
-    image: nbittich/back-office:v2022.0.3
+    image: nbittich/back-office:v2022.1.2
     restart: always
     networks:
       artcoded:
