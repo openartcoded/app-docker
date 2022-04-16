@@ -2,9 +2,7 @@ version: "3.5"
 services:
   keycloak:
     environment:
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: root
-      KEYCLOAK_IMPORT: /tmp/realms/artcoded-realm.json
+      KC_HOSTNAME: auth.somehost.org
     ports:
       - 8080:8080
     networks:
@@ -12,8 +10,8 @@ services:
         aliases:
           - auth.somehost.org
     volumes:
-     # - ./keycloak/realms/export:/tmp/export
-       - ./config/keycloak-dev:/tmp/realms
+        - ./config/keycloak-dev/export:/tmp/export
+        - ./config/keycloak-dev/import:/tmp/import
   api-backend:
     build: ../backend/.
     ports:
@@ -37,7 +35,7 @@ services:
       MAILE_SENDER_SSL_ENABLE: "false"
       MAIL_SENDER_PORT: 25
       MONGO_DB_DATABASE_NAME: artcoded_test
-      JWK_SET_URI: http://auth.somehost.org:8080/auth/realms/Artcoded/protocol/openid-connect/certs
+      JWK_SET_URI: http://auth.somehost.org:8080/realms/Artcoded/protocol/openid-connect/certs
   back-office:
     build: ../backoffice/.
     networks:

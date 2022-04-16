@@ -11,8 +11,8 @@ scrape_configs:
       - targets: ['api-backend:80']
     oauth2:
       client_id: 'prometheus'
-      client_secret: 'hvOb5EiiEJvaDW6IszZAD4U4m8ZfEH2x'
-      token_url: http://keycloak:8080/auth/realms/Artcoded/protocol/openid-connect/token
+      client_secret: 'U03e8p3LXIbV4VJPopEUbN55cjGAm3oE'
+      token_url: http://keycloak:8080/realms/Artcoded/protocol/openid-connect/token
   - job_name: 'triplestore'
     metrics_path: '/actuator/prometheus'
     scrape_interval: 5s
@@ -20,5 +20,5 @@ scrape_configs:
       - targets: ['triplestore:80']
     oauth2:
       client_id: 'prometheus'
-      client_secret: 'hvOb5EiiEJvaDW6IszZAD4U4m8ZfEH2x'
-      token_url: http://keycloak:8080/auth/realms/Artcoded/protocol/openid-connect/token
+      client_secret: 'U03e8p3LXIbV4VJPopEUbN55cjGAm3oE'
+      token_url: http://keycloak:8080/realms/Artcoded/protocol/openid-connect/token
