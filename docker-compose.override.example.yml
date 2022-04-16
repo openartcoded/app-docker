@@ -67,10 +67,10 @@ services:
         aliases:
           - auth.bittich.be
     environment:  
-      #KEYCLOAK_USER: __KEYCLOAK_USER__  
-      #KEYCLOAK_PASSWORD: __KEYCLOAK_PASSWORD__
-      DB_PASSWORD: __POSTGRES_PASSWORD__
-      DB_ADDR: postgresql
+      KC_DB_PASSWORD: __POSTGRES_PASSWORD__
+      KC_HOSTNAME: __KEYCLOAK_HOSTNAME__
+      # user: root
+      
   artemis:
     environment:
       ARTEMIS_USER: artemis
