@@ -2,7 +2,6 @@ version: "3.5"
 services:
   keycloak:
     environment:
-      KEYCLOAK_IMPORT: /tmp/realms/artcoded-realm.json
       KC_HOSTNAME: auth.somehost.org
     user: root
     ports:
