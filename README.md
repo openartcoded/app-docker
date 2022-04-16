@@ -15,7 +15,7 @@ https://openartcoded.github.io/doc/installation/compiled.html
     docker exec -it app-docker_keycloak_1 /opt/keycloak/bin/kc.sh export \
     --file /tmp/export/artcoded-realm.json \
     --realm Artcoded
-    --users different_file
+    --users single_file
     ```
 
 ### Importing realm
