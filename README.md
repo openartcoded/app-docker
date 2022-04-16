@@ -12,16 +12,19 @@ https://openartcoded.github.io/doc/installation/compiled.html
 * run the command:
 
     ```
-    docker exec -it app-docker_keycloak_1 /opt/jboss/keycloak/bin/standalone.sh \
-    -Djboss.socket.binding.port-offset=100 \
-    -Dkeycloak.migration.action=export \
-    -Dkeycloak.migration.provider=singleFile \
-    -Dkeycloak.migration.realmName=Artcoded \
-    -Dkeycloak.migration.usersExportStrategy=REALM_FILE \
-    -Dkeycloak.migration.file=/tmp/export/artcoded-realm.json
-
     docker exec -it app-docker_keycloak_1 /opt/keycloak/bin/kc.sh export \
     --file /tmp/export/artcoded-realm.json \
     --realm Artcoded
     --users different_file
+    ```
+
+### Importing realm
+
+* move the exported realm to `config/keycloak-dev/import`
+
+* run the command:
+
+    ```
+    docker exec -it app-docker_keycloak_1 /opt/keycloak/bin/kc.sh import \
+    --file /tmp/import/artcoded-realm.json
     ```

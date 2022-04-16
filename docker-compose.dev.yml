@@ -12,7 +12,8 @@ services:
         aliases:
           - auth.somehost.org
     volumes:
-      # - ./config/keycloak-dev/export:/tmp/export
+        - ./config/keycloak-dev/export:/tmp/export
+        - ./config/keycloak-dev/import:/tmp/import
       # - ./config/keycloak-dev:/tmp/realms
   api-backend:
     image: nbittich/api-backend:latest

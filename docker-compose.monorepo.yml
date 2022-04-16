@@ -10,8 +10,8 @@ services:
         aliases:
           - auth.somehost.org
     volumes:
-     # - ./keycloak/realms/export:/tmp/export
-       - ./config/keycloak-dev:/tmp/realms
+        - ./config/keycloak-dev/export:/tmp/export
+        - ./config/keycloak-dev/import:/tmp/import
   api-backend:
     build: ../backend/.
     ports:
