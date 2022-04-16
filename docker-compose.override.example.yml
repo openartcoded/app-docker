@@ -27,7 +27,7 @@ services:
       MONGO_DB_USERNAME: __MONGO_INITDB_ROOT_USERNAME__
       ARTEMIS_USER: artemis
       ARTEMIS_PASSWORD: __ARTEMIS_PASSWORD__
-      JWK_SET_URI: http://keycloak:8080/auth/realms/Artcoded/protocol/openid-connect/certs
+      JWK_SET_URI: http://keycloak:8080/realms/Artcoded/protocol/openid-connect/certs
   back-office:
     networks:
       artcoded:
@@ -121,7 +121,7 @@ services:
       ARTEMIS_USER: artemis
       ARTEMIS_URL: tcp://artemis:61616
       ARTEMIS_PASSWORD: __ARTEMIS_PASSWORD__
-      JWK_SET_URI: http://keycloak:8080/auth/realms/Artcoded/protocol/openid-connect/certs
+      JWK_SET_URI: http://keycloak:8080/realms/Artcoded/protocol/openid-connect/certs
   grafana:
     restart: unless-stopped
     user: "1000"
