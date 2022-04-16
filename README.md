@@ -19,4 +19,9 @@ https://openartcoded.github.io/doc/installation/compiled.html
     -Dkeycloak.migration.realmName=Artcoded \
     -Dkeycloak.migration.usersExportStrategy=REALM_FILE \
     -Dkeycloak.migration.file=/tmp/export/artcoded-realm.json
+
+    docker exec -it app-docker_keycloak_1 /opt/keycloak/bin/kc.sh export \
+    --file /tmp/export/artcoded-realm.json \
+    --realm Artcoded
+    --users different_file
     ```
