@@ -61,8 +61,8 @@ services:
     networks:
       artcoded:
     restart: always
-    # volumes:
-    #- ./data/artemis:/var/lib/artemis/data
+    volumes:
+      - ./data/artemis:/var/lib/artemis/data
     environment:
       ARTEMIS_USER: root
       ARTEMIS_PASSWORD: root
