@@ -17,5 +17,6 @@ prometheus_prod.yml
 config/letsencrypt/certbot/**
 config/drive-sync/**
 config/drive-sync/artcoded-cred.json
+config/backend/search-term.yml
 *.pem
 .env
