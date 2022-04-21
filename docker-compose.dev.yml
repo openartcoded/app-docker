@@ -38,7 +38,7 @@ services:
       MAIL_SENDER_PORT: 25
       MONGO_DB_DATABASE_NAME: artcoded_test
       JWK_SET_URI: http://auth.somehost.org:8080/realms/Artcoded/protocol/openid-connect/certs
-      MAIL_SEARCH_TERMS: /usr/config/dev/search-term.yml
+      MAIL_SEARCH_TERM: /usr/config/dev/search-term.yml
   back-office:
     image: nbittich/back-office:latest
     networks:
