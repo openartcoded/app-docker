@@ -28,6 +28,8 @@ services:
       ARTEMIS_USER: artemis
       ARTEMIS_PASSWORD: __ARTEMIS_PASSWORD__
       JWK_SET_URI: http://keycloak:8080/realms/Artcoded/protocol/openid-connect/certs
+      MAIL_SEARCH_TERMS: __MAIL_SEARCH_TERMS__
+
   back-office:
     networks:
       artcoded:
