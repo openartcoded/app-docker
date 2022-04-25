@@ -35,7 +35,7 @@ services:
       - ./data/keycloak-postgres:/var/lib/postgresql/data
   keycloak:
     restart: always
-    image: nbittich/keycloak:17.0.2
+    image: nbittich/keycloak:18.0.0
     networks:
       artcoded:
     environment:
