@@ -68,10 +68,15 @@ services:
       ARTEMIS_PASSWORD: root
   ####### Api Gateway #######
   api-gateway:
-    image: nbittich/api-gateway:2022.1.1
+    image: nbittich/api-gateway:2022.1.2
     restart: always
     networks:
       artcoded:
+    depends_on:
+      - api-backend
+      - back-office
+      - website
+      - triplestore
     volumes:
       - openj9cache:/opt/shareclasses
       - ./config/gateway:/usr/config
@@ -79,7 +84,7 @@ services:
       SERVER_PORT: 80
   ####### Api Backend #######
   api-backend:
-    image: nbittich/api-backend:2022.2.4
+    image: nbittich/api-backend:2022.2.5
     restart: always
     networks:
       artcoded:
@@ -105,7 +110,7 @@ services:
       PROFILE_ACTIVE: prod
   ####### BACK OFFICE #######
   back-office:
-    image: nbittich/back-office:v2022.2.1
+    image: nbittich/back-office:v2022.2.2
     restart: always
     networks:
       artcoded:
@@ -118,7 +123,7 @@ services:
   triplestore:
     networks:
       artcoded:
-    image: nbittich/triplestore:2022.1.0
+    image: nbittich/triplestore:2022.1.1
     restart: always
     environment:
       DATA_DIR: /triplestore
@@ -139,7 +144,7 @@ services:
       - ./data/migrations:/migrations
   ####### Website #######
   website:
-    image: nbittich/website:v2022.1.1
+    image: nbittich/website:v2022.1.2
     restart: always
     networks:
       artcoded:
