@@ -3,6 +3,8 @@ services:
   keycloak:
     environment:
       KC_HOSTNAME: auth.somehost.org
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: root
     ports:
       - 8080:8080
     networks:
