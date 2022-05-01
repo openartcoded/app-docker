@@ -7,7 +7,7 @@ https://openartcoded.github.io/doc/installation/compiled.html
 
 * uncomment volumes in docker-compose dev
     ```
-        # - ./keycloak/realms/export:/tmp/export
+        # - ./config/keycloak-dev/export:/tmp/export
     ```
 * run the command:
 
@@ -27,4 +27,8 @@ https://openartcoded.github.io/doc/installation/compiled.html
     ```
     docker exec -it app-docker_keycloak_1 /opt/keycloak/bin/kc.sh import \
     --file /tmp/import/artcoded-realm.json
+    ```
+* restart the stack
+    ```
+    docker-compose restart
     ```

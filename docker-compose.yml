@@ -164,6 +164,8 @@ services:
     image: prom/prometheus:v2.34.0
     volumes:
       - ./data/prometheus:/prometheus
+    depends_on:
+      - keycloak
     networks:
       artcoded:
 volumes:
