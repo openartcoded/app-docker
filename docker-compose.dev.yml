@@ -38,6 +38,7 @@ services:
       MAIL_SENDER_SERVER: "greenmail.somehost.org"
       MAILE_SENDER_SSL_ENABLE: "false"
       MAIL_SENDER_PORT: 25
+      MONGOCK_TRANSACTION_ENABLED: "false"  # todo fix the bug
       MONGO_DB_DATABASE_NAME: artcoded_test
       JWK_SET_URI: http://auth.somehost.org:8080/realms/Artcoded/protocol/openid-connect/certs
       MAIL_SEARCH_TERM: /usr/config/dev/search-term.yml
