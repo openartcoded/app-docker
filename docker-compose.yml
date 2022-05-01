@@ -98,6 +98,7 @@ services:
       PROJECT_BASE_PATH: /var/artcoded/data
       ARTEMIS_URL: tcp://artemis:61616
       MULTIPART_TEMP_DIRECTORY: /var/undertow/upload
+      MONGOCK_TRANSACTION_ENABLED: "false"  # todo fix the bug
       ARTEMIS_USER: root
       ARTEMIS_PASSWORD: root
       REDIS_HOST: redis
