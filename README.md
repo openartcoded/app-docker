@@ -17,6 +17,12 @@ https://openartcoded.github.io/doc/installation/compiled.html
     --realm Artcoded
     --users single_file
     ```
+> On windows you should use "-" instead of "_" & you can't use "\" apparently, e.g :
+
+   ```
+      docker exec -it app-docker-keycloak-1 /opt/keycloak/bin/kc.sh export --file /tmp/export/artcoded-realm.json  --realm Artcoded --users single_file
+   ```
+
 
 ### Importing realm
 
@@ -28,6 +34,13 @@ https://openartcoded.github.io/doc/installation/compiled.html
     docker exec -it app-docker_keycloak_1 /opt/keycloak/bin/kc.sh import \
     --file /tmp/import/artcoded-realm.json
     ```
+    
+> On windows you should use "-" instead of "_" & you can't use "\" apparently, e.g :
+
+
+       docker exec -it app-docker-keycloak-1 /opt/keycloak/bin/kc.sh import  --file /tmp/import/artcoded-realm.json
+ 
+    
 * restart the stack
     ```
     docker-compose restart
