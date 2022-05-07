@@ -38,18 +38,18 @@ spring:
           predicates:
             - Host=backoffice.somehost.org
 ############################################################ website #########################################################################
-        - id: website-api
-          uri: http://api.somehost.org
-          predicates:
-            - Host=somehost.org
-            - Path=/api/**
-        - id: website-sparql-endpoint
-          uri: http://triplestore
-          predicates:
-            - Host=somehost.org
-            - Path=/sparql/**
-          filters:
-            - RewritePath=/sparql(?<segment>.*), /public/sparql$\{segment}
+        # - id: website-api
+        #   uri: http://api.somehost.org
+        #   predicates:
+        #     - Host=somehost.org
+        #     - Path=/api/**
+        # - id: website-sparql-endpoint
+        #   uri: http://triplestore
+        #   predicates:
+        #     - Host=somehost.org
+        #     - Path=/sparql/**
+        #   filters:
+        #     - RewritePath=/sparql(?<segment>.*), /public/sparql$\{segment}
         - id: website
           uri: http://somehost.org
           predicates:
