@@ -11,15 +11,6 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
       - ./data/db:/data/db
-  mongo-express:
-    image: mongo-express
-    networks:
-      artcoded:
-    restart: always
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: root
-      ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
   ####### Keycloak #######
   postgresql:
     restart: always

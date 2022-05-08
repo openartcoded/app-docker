@@ -1,5 +1,16 @@
 version: "3.5"
 services:
+  mongo-express:
+    image: mongo-express
+    networks:
+      artcoded:
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: root
+      ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
+    ports:
+      - 8081:8081
   keycloak:
     environment:
       KC_HOSTNAME: auth.somehost.org
@@ -80,9 +91,6 @@ services:
       - "80:80"
     environment:
       GATEWAY_CONFIG_FILE: /usr/config/gateway-dev.yml
-  mongo-express:
-    ports:
-      - 8081:8081
   tlsproxy:
     image: caddy:2
     networks:
