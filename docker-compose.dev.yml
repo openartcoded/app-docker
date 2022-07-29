@@ -12,10 +12,11 @@ services:
     ports:
       - 8081:8081
   keycloak:
+   # image: nbittich/keycloak:latest
     environment:
       KC_HOSTNAME: auth.somehost.org
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: root
+     # KEYCLOAK_ADMIN: admin
+     # KEYCLOAK_ADMIN_PASSWORD: root
     user: root
     ports:
       - 8080:8080
