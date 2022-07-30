@@ -52,10 +52,12 @@ services:
       artcoded:
     restart: always
     volumes:
-      - ./data/artemis:/var/lib/artemis/data
+      - ./data/artemis:/var/lib/artemis-instance/data
+      - ./data/artemis/journal:/var/lib/artemis-instance/data/journal
     environment:
       ARTEMIS_USER: root
       ARTEMIS_PASSWORD: root
+    user: root
   ####### Api Gateway #######
   api-gateway:
     image: nbittich/api-gateway:2022.1.4
