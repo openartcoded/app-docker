@@ -45,3 +45,12 @@ https://openartcoded.github.io/doc/installation/compiled.html
     ```
     docker-compose restart
     ```
+
+### Misc
+
+#### mount volume docker
+udisksctl mount -b /dev/sda1
+#### list volumes
+lsblk -o NAME,FSTYPE,LABEL,SIZE,MOUNTPOINT
+#### disable docker
+sudo systemctl disable docker.service docker.socket
