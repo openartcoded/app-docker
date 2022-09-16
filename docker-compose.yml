@@ -76,7 +76,7 @@ services:
       SERVER_PORT: 80
   ####### Api Backend #######
   api-backend:
-    image: nbittich/api-backend:2022.3.2
+    image: nbittich/api-backend:2022.3.3
     restart: always
     networks:
       artcoded:
