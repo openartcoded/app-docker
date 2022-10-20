@@ -2,7 +2,7 @@ version: "3.5"
 services:
   ####### MongoDB #######
   mongo:
-    image: mongo
+    image: mongo:6
     networks:
       artcoded:
     restart: always
@@ -16,7 +16,7 @@ services:
     restart: always
     networks:
       artcoded:
-    image: "postgres"
+    image: "postgres:14"
     environment:
       ALLOW_EMPTY_PASSWORD: "yes"
       POSTGRES_USER: keycloak
@@ -26,7 +26,7 @@ services:
       - ./data/keycloak-postgres:/var/lib/postgresql/data
   keycloak:
     restart: always
-    image: nbittich/keycloak:19.0.0
+    image: nbittich/keycloak:19.0.3
     networks:
       artcoded:
     environment:
@@ -38,7 +38,7 @@ services:
     command: start --optimized
   ####### Redis #######
   redis:
-    image: redis:alpine
+    image: redis:7-alpine
     restart: always
     networks:
       artcoded:
@@ -60,7 +60,7 @@ services:
     user: root
   ####### Api Gateway #######
   api-gateway:
-    image: nbittich/api-gateway:2022.1.6
+    image: nbittich/api-gateway:2022.1.7
     restart: always
     networks:
       artcoded:
@@ -76,7 +76,7 @@ services:
       SERVER_PORT: 80
   ####### Api Backend #######
   api-backend:
-    image: nbittich/api-backend:2022.5.4
+    image: nbittich/api-backend:2022.5.5
     restart: always
     networks:
       artcoded:
@@ -103,7 +103,7 @@ services:
       PROFILE_ACTIVE: prod
   ####### BACK OFFICE #######
   back-office:
-    image: nbittich/back-office:v2022.5.4
+    image: nbittich/back-office:v2022.5.5
     restart: always
     networks:
       artcoded:
@@ -116,7 +116,7 @@ services:
   triplestore:
     networks:
       artcoded:
-    image: nbittich/triplestore:2022.1.6
+    image: nbittich/triplestore:2022.1.7
     restart: always
     environment:
       DATA_DIR: /triplestore
