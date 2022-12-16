@@ -50,10 +50,13 @@ services:
         aliases:
           - bittich.be
     environment:
-      BACKEND_URL: "https://bittich.be"
-      SERVER_BACKEND_URL: "http://bittich.be"
-      SPARQL_ENDPOINT: "https://bittich.be/sparql"
-      ENV_TYPE: "PROD"
+      # BACKEND_URL: "https://bittich.be"
+      # SERVER_BACKEND_URL: "http://bittich.be"
+      # SPARQL_ENDPOINT: "https://bittich.be/sparql"
+      # ENV_TYPE: "PROD"
+      BACKEND_URL: "http://api-backend"
+      SERVER_PORT: 80
+      SPARQL_DEFAULT_URL: "http://triplestore/public/sparql"
   api-gateway:
     environment:
       GATEWAY_CONFIG_FILE: /usr/config/gateway_prod.yml

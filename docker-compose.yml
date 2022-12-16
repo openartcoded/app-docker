@@ -26,7 +26,7 @@ services:
       - ./data/keycloak-postgres:/var/lib/postgresql/data
   keycloak:
     restart: always
-    image: nbittich/keycloak:20.0.0
+    image: nbittich/keycloak:20.0.2
     networks:
       artcoded:
     environment:
@@ -47,7 +47,7 @@ services:
       - ./data/redis:/data
   ####### Artemis #######
   artemis:
-    image: nbittich/artemis:v2022.1.2-2_26_0-jre-18
+    image: nbittich/artemis:v2023.0.0-2_27_1-jre-18
     networks:
       artcoded:
     restart: always
@@ -60,7 +60,7 @@ services:
     user: root
   ####### Api Gateway #######
   api-gateway:
-    image: nbittich/api-gateway:2022.1.8
+    image: nbittich/api-gateway:2023.0.0
     restart: always
     networks:
       artcoded:
@@ -76,7 +76,7 @@ services:
       SERVER_PORT: 80
   ####### Api Backend #######
   api-backend:
-    image: nbittich/api-backend:2022.5.7
+    image: nbittich/api-backend:2023.0.0
     restart: always
     networks:
       artcoded:
@@ -103,7 +103,7 @@ services:
       PROFILE_ACTIVE: prod
   ####### BACK OFFICE #######
   back-office:
-    image: nbittich/back-office:v2022.5.7
+    image: nbittich/back-office:v2023.0.0
     restart: always
     networks:
       artcoded:
@@ -116,7 +116,7 @@ services:
   triplestore:
     networks:
       artcoded:
-    image: nbittich/triplestore:2022.1.8
+    image: nbittich/triplestore:2023.0.0
     restart: always
     environment:
       DATA_DIR: /triplestore
@@ -137,12 +137,14 @@ services:
       - ./data/migrations:/migrations
   ####### Website #######
   website:
-    image: nbittich/website:v2022.1.2
+    image: nbittich/websitev2:v2023.0.0
     restart: always
     networks:
       artcoded:
-    volumes:
-      - ./config/website/nginx.conf:/etc/nginx/nginx.conf
+    environment:
+      BACKEND_URL: "http://api-backend"
+      SERVER_PORT: 80
+      SPARQL_DEFAULT_URL: "http://triplestore/public/sparql"
   ####### Graphana #######
   grafana:
     restart: unless-stopped
