@@ -18,5 +18,7 @@ config/letsencrypt/certbot/**
 config/drive-sync/**
 config/drive-sync/artcoded-cred.json
 config/backend/search-term.yml
+config/scripts/ext-scripts/**
+config/scripts/ext/**
 *.pem
 .env
