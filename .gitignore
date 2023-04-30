@@ -4,9 +4,6 @@ docker-compose.override.yml
 *.iml
 
 .DS_STORE
-
-
-
 DS_STORE
 .DS_Store
 
@@ -20,5 +17,6 @@ config/drive-sync/artcoded-cred.json
 config/backend/search-term.yml
 config/scripts/ext-scripts/**
 config/scripts/ext/**
+config/artemis/keycloak-prod.json
 *.pem
 .env

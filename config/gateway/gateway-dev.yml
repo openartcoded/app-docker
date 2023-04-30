@@ -20,8 +20,6 @@ spring:
           uri: http://auth.somehost.org:8080
           predicates:
             - Host=auth.somehost.org
-          filters:
-            - AddRequestHeader=X-Forwarded-Port, 443
 ############################################################ back-office ######################################################################
         - id: back-office-api
           uri: http://api.somehost.org

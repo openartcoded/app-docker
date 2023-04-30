@@ -47,16 +47,14 @@ services:
       - ./data/redis:/data
   ####### Artemis #######
   artemis:
-    image: nbittich/artemis:v2023.0.0-2_28_0-jre-18
+    image: nbittich/artemis:v2023.1.0-2_28_0-jre-20
     networks:
       artcoded:
     restart: always
     volumes:
+      - ./config/artemis/login.config:/var/lib/artemis-instance/etc/login.config
       - ./data/artemis:/var/lib/artemis-instance/data
       - ./data/artemis/journal:/var/lib/artemis-instance/data/journal
-    environment:
-      ARTEMIS_USER: root
-      ARTEMIS_PASSWORD: root
     user: root
   ####### Api Gateway #######
   api-gateway:
@@ -92,8 +90,8 @@ services:
       ARTEMIS_URL: tcp://artemis:61616
       MULTIPART_TEMP_DIRECTORY: /var/undertow/upload
       MONGOCK_TRANSACTION_ENABLED: "false" # todo fix the bug
-      ARTEMIS_USER: root
-      ARTEMIS_PASSWORD: root
+      ARTEMIS_USER: artemis
+      ARTEMIS_PASSWORD: artemis
       REDIS_HOST: redis
       REDIS_PORT: 6379
       LOGGING_CONFIG_FILE: /usr/config/logback.xml
@@ -127,8 +125,8 @@ services:
       SECURITY_CONFIG: "classpath:config/security.yml"
       ARTEMIS_CONFIG: "classpath:config/artemis.yml"
       ARTEMIS_URL: tcp://artemis:61616
-      ARTEMIS_USER: root
-      ARTEMIS_PASSWORD: root
+      ARTEMIS_USER: artemis
+      ARTEMIS_PASSWORD: artemis
       MIGRATION_PATH: /migrations
       MIGRATION_DEFAULT_GRAPH: "https://bittich.be/application"
       SERVER_PORT: 80

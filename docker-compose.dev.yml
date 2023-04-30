@@ -14,9 +14,10 @@ services:
   keycloak:
    # image: nbittich/keycloak:latest
     environment:
-      KC_HOSTNAME: auth.somehost.org
-     # KEYCLOAK_ADMIN: admin
-     # KEYCLOAK_ADMIN_PASSWORD: root
+      KC_HOSTNAME_ADMIN_URL: https://auth.somehost.org
+      KC_HOSTNAME_URL: https://auth.somehost.org
+      KC_HOSTNAME_STRICT_HTTPS: 'no'
+      KC_HTTP_ENABLED: 'yes'
     user: root
     ports:
       - 8080:8080
@@ -80,6 +81,8 @@ services:
     ports:
       - 27018:27017
   artemis:
+    volumes:
+      - ./config/artemis/keycloak_dev.json:/var/lib/artemis-instance/etc/keycloak.json
     ports:
       - 8161:8161
       - 61616:61616
