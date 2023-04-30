@@ -53,6 +53,7 @@ services:
     restart: always
     volumes:
       - ./config/artemis/login.config:/var/lib/artemis-instance/etc/login.config
+      - ./config/artemis/broker.xml:/var/lib/artemis-instance/etc/broker.xml
       - ./data/artemis:/var/lib/artemis-instance/data
       - ./data/artemis/journal:/var/lib/artemis-instance/data/journal
     user: root
