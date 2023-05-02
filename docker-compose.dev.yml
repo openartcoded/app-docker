@@ -91,24 +91,19 @@ services:
       - "6379:6379"
   api-gateway:
     image: nbittich/api-gateway:latest
-    ports:
-      - "80:80"
+      #ports:
+      #  - "80:80"
     environment:
       GATEWAY_CONFIG_FILE: /usr/config/gateway-dev.yml
   tlsproxy:
-    image: caddy:2
+    build:
+      context: ./nginx-dev/.
     networks:
       artcoded:
     ports:
       - "443:443"
-    environment:
-      API_ADDRESS: "api.somehost.org"
-      BACK_OFFICE_ADDRESS: "backoffice.somehost.org"
-      WEBSITE_ADDRESS: "somehost.org"
-      AUTH_ADDRESS: "auth.somehost.org"
-      ROUNDCUBE_ADDRESS: "mail.somehost.org"
     volumes:
-      - ./config/tlsproxy/Caddyfile:/etc/caddy/Caddyfile
+      - ./config/tlsproxy:/etc/nginx/conf.d
 
   triplestore:
     image: nbittich/triplestore:latest
