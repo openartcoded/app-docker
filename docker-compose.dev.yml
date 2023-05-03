@@ -102,8 +102,11 @@ services:
       artcoded:
     ports:
       - "443:443"
+      - "8883:8883"
     volumes:
-      - ./config/tlsproxy:/etc/nginx/conf.d
+      - ./config/tlsproxy/http:/etc/nginx/conf.d
+      - ./config/tlsproxy/tcp:/etc/nginx/tcpconf.d
+      - ./config/tlsproxy/nginx.conf:/etc/nginx/nginx.conf
 
   triplestore:
     image: nbittich/triplestore:latest
