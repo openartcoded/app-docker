@@ -96,6 +96,7 @@ services:
     environment:
       GATEWAY_CONFIG_FILE: /usr/config/gateway-dev.yml
   tlsproxy:
+    restart: "always"
     build:
       context: ./nginx-dev/.
     networks:

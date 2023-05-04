@@ -11,6 +11,8 @@ gateway-prod.yml
 gateway_prod.yml
 prometheus_prod.yml
 
+config/s3-sync/**
+config/keycloak-prod/**
 config/letsencrypt/certbot/**
 config/drive-sync/**
 config/drive-sync/artcoded-cred.json
