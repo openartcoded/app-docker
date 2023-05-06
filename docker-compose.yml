@@ -117,7 +117,7 @@ services:
   triplestore:
     networks:
       artcoded:
-    image: nbittich/triplestore:2023.1.0
+    image: nbittich/triplestore:2023.1.1
     restart: always
     environment:
       DATA_DIR: /triplestore
