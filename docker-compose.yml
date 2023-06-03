@@ -104,7 +104,7 @@ services:
       PATH_TO_SCRIPTS: /var/artcoded_scripts
   ####### BACK OFFICE #######
   back-office:
-    image: nbittich/back-office:v2023.5.2
+    image: nbittich/back-office:v2023.5.3
     restart: always
     networks:
       artcoded:
