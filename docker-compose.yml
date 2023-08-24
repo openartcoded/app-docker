@@ -59,7 +59,7 @@ services:
     user: root
   ####### Api Gateway #######
   api-gateway:
-    image: nbittich/api-gateway:2023.1.1
+    image: nbittich/api-gateway:2023.1.2
     restart: always
     networks:
       artcoded:
@@ -75,7 +75,7 @@ services:
       SERVER_PORT: 80
   ####### Api Backend #######
   api-backend:
-    image: nbittich/api-backend:2023.6.3
+    image: nbittich/api-backend:2023.6.4
     restart: always
     networks:
       artcoded:
@@ -104,7 +104,7 @@ services:
       PATH_TO_SCRIPTS: /var/artcoded_scripts
   ####### BACK OFFICE #######
   back-office:
-    image: nbittich/back-office:v2023.6.3
+    image: nbittich/back-office:v2023.6.4
     restart: always
     networks:
       artcoded:
@@ -117,7 +117,7 @@ services:
   triplestore:
     networks:
       artcoded:
-    image: nbittich/triplestore:2023.2.2
+    image: nbittich/triplestore:2023.2.3
     restart: always
     environment:
       DATA_DIR: /triplestore
