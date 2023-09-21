@@ -15,8 +15,8 @@ https://openartcoded.github.io/doc/installation/compiled.html
       ```
       docker exec -it app-docker_keycloak_1 /opt/keycloak/bin/kc.sh export \
       --file /tmp/export/artcoded-realm.json \
-      --realm Artcoded
-      --users single_file
+      --realm Artcoded \
+      --users same_file
       ```
 
   > On windows you should use "-" instead of "\_" & you can't use "\" apparently, e.g :
