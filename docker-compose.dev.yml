@@ -12,13 +12,14 @@ services:
     ports:
       - 8081:8081
   keycloak:
-   # image: nbittich/keycloak:latest
+    # image: nbittich/keycloak:latest
     environment:
       KC_HOSTNAME_ADMIN_URL: https://auth.somehost.org
       KC_HOSTNAME_URL: https://auth.somehost.org
-      KC_HOSTNAME_STRICT_HTTPS: 'no'
-      KC_HTTP_ENABLED: 'yes'
-    user: root
+      KC_HOSTNAME_STRICT_HTTPS: "no"
+      KC_HTTP_ENABLED: "yes"
+    user:
+      root
       #ports:
       #- 8080:8080
     networks:
@@ -26,11 +27,12 @@ services:
         aliases:
           - auth.somehost.org
     volumes:
-        - ./config/keycloak-dev/export:/tmp/export
-        - ./config/keycloak-dev/import:/tmp/import
+      - ./config/keycloak-dev/export:/tmp/export
+      - ./config/keycloak-dev/import:/tmp/import
       # - ./config/keycloak-dev:/tmp/realms
   api-backend:
-    image: nbittich/api-backend:latest
+    image:
+      nbittich/api-backend:latest
       #  ports:
       # - 9000:80
     links:
@@ -90,7 +92,8 @@ services:
     ports:
       - "6379:6379"
   api-gateway:
-    image: nbittich/api-gateway:latest
+    image:
+      nbittich/api-gateway:latest
       #ports:
       #- "80:80"
     environment:
@@ -110,7 +113,8 @@ services:
       - ./config/tlsproxy/nginx.conf:/etc/nginx/nginx.conf
 
   triplestore:
-    image: nbittich/triplestore:latest
+    image:
+      nbittich/triplestore:latest
       #ports:
       #- 8888:80
   prometheus:
@@ -133,21 +137,21 @@ services:
         aliases:
           - greenmail.somehost.org
     environment:
-      GREENMAIL_OPTS: '-Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users.login=email -Dgreenmail.setup.all -Dgreenmail.users=fee:fee@somehost.com,noreply:noreply@somehost.com,accountant1:accountant1@somehost.com,accountant2:accountant2@somehost.com' 
+      GREENMAIL_OPTS: "-Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users.login=email -Dgreenmail.setup.all -Dgreenmail.users=fee:fee@somehost.com,noreply:noreply@somehost.com,accountant1:accountant1@somehost.com,accountant2:accountant2@somehost.com"
     ports:
       - "8996:8080"
   roundcube:
     image: roundcube/roundcubemail:latest
     depends_on:
-        - greenmail
+      - greenmail
     networks:
       artcoded:
         aliases:
           - mail.somehost.org
     environment:
-        ROUNDCUBEMAIL_DEFAULT_HOST: greenmail
-        ROUNDCUBEMAIL_DEFAULT_PORT: 143
-        ROUNDCUBEMAIL_SMTP_SERVER: greenmail
-        ROUNDCUBEMAIL_SMTP_PORT: 25 
+      ROUNDCUBEMAIL_DEFAULT_HOST: greenmail
+      ROUNDCUBEMAIL_DEFAULT_PORT: 143
+      ROUNDCUBEMAIL_SMTP_SERVER: greenmail
+      ROUNDCUBEMAIL_SMTP_PORT: 25
 networks:
   artcoded:
