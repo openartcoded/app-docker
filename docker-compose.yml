@@ -26,7 +26,7 @@ services:
       - ./data/keycloak-postgres:/var/lib/postgresql/data
   keycloak:
     restart: always
-    image: nbittich/keycloak:22.0.5
+    image: nbittich/keycloak:23.0.1
     networks:
       artcoded:
     environment:
@@ -47,7 +47,7 @@ services:
       - ./data/redis:/data
   ####### Artemis #######
   artemis:
-    image: nbittich/artemis:v2023.3.0-2_31_0-jre-21
+    image: nbittich/artemis:v2024.0.0-2_31_2-jre-21
     networks:
       artcoded:
     restart: always
