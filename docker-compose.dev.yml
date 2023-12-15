@@ -31,10 +31,9 @@ services:
       - ./config/keycloak-dev/import:/tmp/import
       # - ./config/keycloak-dev:/tmp/realms
   api-backend:
-    image:
-      nbittich/api-backend:latest
-      #  ports:
-      # - 9000:80
+    image: nbittich/api-backend:latest
+    ports:
+      - 9000:80
     links:
       - greenmail
     networks:
@@ -113,10 +112,9 @@ services:
       - ./config/tlsproxy/nginx.conf:/etc/nginx/nginx.conf
 
   triplestore:
-    image:
-      nbittich/triplestore:latest
-      #ports:
-      #- 8888:80
+    image: nbittich/triplestore:latest
+    ports:
+      - 8888:80
   prometheus:
     user: root
     restart: "no"
