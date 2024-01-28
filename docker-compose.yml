@@ -75,7 +75,7 @@ services:
       SERVER_PORT: 80
   ####### Api Backend #######
   api-backend:
-    image: nbittich/api-backend:2024.0.8
+    image: nbittich/api-backend:2024.1.0
     restart: always
     networks:
       artcoded:
@@ -104,7 +104,7 @@ services:
       PATH_TO_SCRIPTS: /var/artcoded_scripts
   ####### BACK OFFICE #######
   back-office:
-    image: nbittich/back-office:v2024.0.6
+    image: nbittich/back-office:v2024.1.0
     restart: always
     networks:
       artcoded:
