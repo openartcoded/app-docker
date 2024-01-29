@@ -164,6 +164,20 @@ services:
       - keycloak
     networks:
       artcoded:
+  ###### Nextcloud ######
+  cloud:
+    restart: always
+    image: nextcloud:production-fpm
+    volumes:
+      - ./data/nextcloud:/var/www/html
+    environment:
+      POSTGRES_HOST: postgresql
+      REDIS_HOST: redis
+    depends_on:
+      - postgresql
+      - redis
+    networks:
+      artcoded:
 volumes:
   openj9cache:
 networks:

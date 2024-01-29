@@ -64,3 +64,11 @@ sudo systemctl disable docker.service docker.socket
 ```
 drc exec  postgresql psql --username=keycloak -c "UPDATE REALM SET ADMIN_THEME='keycloak' WHERE ADMIN_THEME IS NULL;";
 ```
+
+### postgres - add new user
+
+```
+docker-compose exec  postgresql psql --username=keycloak -c "CREATE USER nextcloud WITH PASSWORD 'nextcloud';" \
+    -c "CREATE DATABASE nextcloud;" \
+    -c "GRANT ALL PRIVILEGES ON DATABASE nextcloud TO nextcloud;"
+```
