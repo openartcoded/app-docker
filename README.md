@@ -72,3 +72,11 @@ docker-compose exec  postgresql psql --username=keycloak -c "CREATE USER nextclo
     -c "CREATE DATABASE nextcloud;" \
     -c "GRANT ALL PRIVILEGES ON DATABASE nextcloud TO nextcloud;"
 ```
+
+### external storage sftp nextcloud
+
+```
+docker-compose exec cloud docker-php-ext-install ftp
+docker-compose exec cloud docker-php-ext-enable ftp
+docker-compose restart cloud
+```
