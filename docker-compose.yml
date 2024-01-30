@@ -167,7 +167,7 @@ services:
   ###### Nextcloud ######
   cloud:
     restart: always
-    image: nextcloud:production-fpm
+    image: nextcloud:28-fpm-alpine
     volumes:
       - ./data/nextcloud:/var/www/html
     environment:
