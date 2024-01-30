@@ -78,5 +78,7 @@ docker-compose exec  postgresql psql --username=keycloak -c "CREATE USER nextclo
 ```
 docker-compose exec cloud docker-php-ext-install ftp
 docker-compose exec cloud docker-php-ext-enable ftp
+docker-compose exec cloud apk add --update bzip2-dev
+docker-compose exec cloud docker-php-ext-install bz2
 docker-compose restart cloud
 ```
