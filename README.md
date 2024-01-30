@@ -81,4 +81,7 @@ docker-compose exec cloud docker-php-ext-enable ftp
 docker-compose exec cloud apk add --update bzip2-dev
 docker-compose exec cloud docker-php-ext-install bz2
 docker-compose restart cloud
+docker-compose exec --user www-data cloud php occ config:system:set default_phone_region --value="BE"
+docker-compose exec cloud sed -i "s/opcache.interned_strings_buffer=8/opcache.interned_strings_buffer=16/g" /usr/local/etc/php/conf.d/opcache-recommended.ini |grep opcache.interned_strings_buffer /usr/local/etc/php/conf.d/opcache-recommended.ini
+
 ```
