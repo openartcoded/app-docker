@@ -178,6 +178,21 @@ services:
       - redis
     networks:
       artcoded:
+  cloud-cron:
+    image: nextcloud:28-fpm-alpine
+    environment:
+      POSTGRES_HOST: postgresql
+      REDIS_HOST: redis
+    restart: always
+    volumes:
+      - ./../nextcloud-data:/var/www/html
+    entrypoint: /cron.sh
+    networks:
+      artcoded:
+    depends_on:
+      - postgresql
+      - redis
+      - cloud
 volumes:
   openj9cache:
 networks:
