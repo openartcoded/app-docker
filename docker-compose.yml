@@ -47,7 +47,7 @@ services:
       - ./data/redis:/data
   ####### Artemis #######
   artemis:
-    image: nbittich/artemis:v2024.0.0-2_31_2-jre-21
+    image: nbittich/artemis:2.32.0
     networks:
       artcoded:
     restart: always
