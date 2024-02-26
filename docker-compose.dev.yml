@@ -14,7 +14,7 @@ services:
     ports:
       - 8081:8081
   keycloak:
-    # image: nbittich/keycloak:latest
+    image: nbittich/keycloak:latest
     environment:
       KC_HOSTNAME_ADMIN_URL: https://auth.somehost.org
       KC_HOSTNAME_URL: https://auth.somehost.org
