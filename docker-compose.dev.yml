@@ -1,25 +1,21 @@
-version: "3.5"
+version: "3.8"
 services:
+  postgresql:
+    env_file:
+      - ./env-files/dev/postgresql.env
   mongo-express:
     image: mongo-express
     networks:
       artcoded:
     restart: always
-    environment:
-      ME_CONFIG_BASICAUTH_USERNAME: admin
-      ME_CONFIG_BASICAUTH_PASSWORD: admin
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: root
-      ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
+    env_file:
+      - ./env-files/dev/express.env
     ports:
       - 8081:8081
   keycloak:
     image: nbittich/keycloak:latest
-    environment:
-      KC_HOSTNAME_ADMIN_URL: https://auth.somehost.org
-      KC_HOSTNAME_URL: https://auth.somehost.org
-      KC_HOSTNAME_STRICT_HTTPS: "false"
-      KC_HTTP_ENABLED: "true"
+    env_file:
+      - ./env-files/dev/keycloak.env
     user:
       root
       #ports:
@@ -42,45 +38,28 @@ services:
       artcoded:
         aliases:
           - api.somehost.org
-    environment:
-      CAMEL_MAIL_IMAP_USERNAME: "fee@somehost.com"
-      CAMEL_MAIL_IMAP_PASSWORD: "fee"
-      CAMEL_MAIL_IMAP_SSL: "false"
-      CAMEL_MAIL_IMAP_HOST: "greenmail.somehost.org"
-      CAMEL_MAIL_IMAP_PROTOCOL: imap
-      CAMEL_MAIL_IMAP_PORT: 143
-      MAIL_SENDER_USERNAME: "noreply@somehost.com"
-      MAIL_SENDER_PASSWORD: "noreply"
-      MAIL_SENDER_SERVER: "greenmail.somehost.org"
-      MAILE_SENDER_SSL_ENABLE: "false"
-      MAIL_SENDER_PORT: 25
-      MONGO_DB_DATABASE_NAME: artcoded_test
-      JWK_SET_URI: http://auth.somehost.org:8080/realms/Artcoded/protocol/openid-connect/certs
-      MAIL_SEARCH_TERM: /usr/config/dev/search-term.yml
+    env_file:
+      - ./env-files/dev/backend.env
   back-office:
     image: nbittich/back-office:latest
     networks:
       artcoded:
         aliases:
           - backoffice.somehost.org
-    environment:
-      KEYCLOAK_URL: "https://auth.somehost.org"
-      KEYCLOAK_REALM: "Artcoded"
-      KEYCLOAK_CLIENT_ID: "frontend-client"
-      BACKEND_URL: "https://backoffice.somehost.org"
-      SPARQL_ENDPOINT: "https://backoffice.somehost.org/sparql"
-      FRONTEND_URL: "https://somehost.org"
+    env_file:
+      - ./env-files/dev/backoffice.env
+
   website:
     image: nbittich/websitev2:latest
     networks:
       artcoded:
         aliases:
           - somehost.org
-    environment:
-      BACKEND_URL: "http://api-backend"
-      SERVER_PORT: 80
-      SPARQL_DEFAULT_URL: "http://triplestore/public/sparql"
+    env_file:
+      - ./env-files/dev/website.env
   mongo:
+    env_file:
+      - ./env-files/dev/mongo.env
     ports:
       - 27018:27017
   artemis:
@@ -93,12 +72,10 @@ services:
     ports:
       - "6379:6379"
   api-gateway:
-    image:
-      nbittich/api-gateway:latest
-      #ports:
-      #- "80:80"
-    environment:
-      GATEWAY_CONFIG_FILE: /usr/config/gateway-dev.yml
+    image: nbittich/api-gateway:latest
+    env_file:
+      - ./env-files/dev/gateway.env
+
   tlsproxy:
     restart: "always"
     build:
@@ -118,6 +95,8 @@ services:
     image: nbittich/triplestore:latest
     ports:
       - 8888:80
+    env_file:
+      - ./env-files/dev/triplestore.env
   prometheus:
     user: root
     restart: "no"
@@ -137,8 +116,8 @@ services:
       artcoded:
         aliases:
           - greenmail.somehost.org
-    environment:
-      GREENMAIL_OPTS: "-Dgreenmail.hostname=0.0.0.0 -Dgreenmail.users.login=email -Dgreenmail.setup.all -Dgreenmail.users=fee:fee@somehost.com,noreply:noreply@somehost.com,accountant1:accountant1@somehost.com,accountant2:accountant2@somehost.com"
+    env_file:
+      - ./env-files/dev/greenmail.env
     ports:
       - "8996:8080"
   roundcube:
@@ -149,47 +128,15 @@ services:
       artcoded:
         aliases:
           - mail.somehost.org
-    environment:
-      ROUNDCUBEMAIL_DEFAULT_HOST: greenmail
-      ROUNDCUBEMAIL_DEFAULT_PORT: 143
-      ROUNDCUBEMAIL_SMTP_SERVER: greenmail
-      ROUNDCUBEMAIL_SMTP_PORT: 25
+    env_file:
+      - ./env-files/dev/roundcube.env
+
   cloud-cron:
-    environment:
-      POSTGRES_USER: nextcloud
-      POSTGRES_PASSWORD: nextcloud
-      POSTGRES_DB: nextcloud
-      NEXTCLOUD_ADMIN_USER: admin
-      NEXTCLOUD_ADMIN_PASSWORD: admin
-      REDIS_HOST_PORT: 6379
-      SMTP_NAME: "noreply@somehost.com"
-      MAIL_FROM_ADDRESS: "noreply@somehost.com"
-      SMTP_PASSWORD: "noreply"
-      SMTP_HOST: "greenmail"
-      MAIL_DOMAIN: "greenmail.somehost.org"
-      #SMTP_SECURE: "false"
-      SMTP_PORT: 25
-      OVERWRITEHOST: "cloud.somehost.org"
-      OVERWRITEPROTOCOL: "https"
-      OVERWRITECLIURL: "https://cloud.somehost.org"
+    env_file:
+      - ./env-files/dev/cloud.env
   cloud:
-    environment:
-      POSTGRES_USER: nextcloud
-      POSTGRES_PASSWORD: nextcloud
-      POSTGRES_DB: nextcloud
-      NEXTCLOUD_ADMIN_USER: admin
-      NEXTCLOUD_ADMIN_PASSWORD: admin
-      REDIS_HOST_PORT: 6379
-      SMTP_NAME: "noreply@somehost.com"
-      MAIL_FROM_ADDRESS: "noreply@somehost.com"
-      SMTP_PASSWORD: "noreply"
-      SMTP_HOST: "greenmail"
-      MAIL_DOMAIN: "greenmail.somehost.org"
-      #SMTP_SECURE: "false"
-      SMTP_PORT: 25
-      OVERWRITEHOST: "cloud.somehost.org"
-      OVERWRITEPROTOCOL: "https"
-      OVERWRITECLIURL: "https://cloud.somehost.org"
+    env_file:
+      - ./env-files/dev/cloud.env
 
 networks:
   artcoded:

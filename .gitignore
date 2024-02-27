@@ -22,3 +22,5 @@ config/scripts/ext/**
 config/artemis/keycloak-prod.json
 *.pem
 .env
+
+/env-files/prod/**
