@@ -21,7 +21,7 @@ services:
     image: nbittich/keycloak:24.0.2
     networks:
       artcoded:
-    command: start --optimized
+    command: start --optimized --proxy-headers xforwarded
   ####### Redis #######
   redis:
     image: valkey/valkey:7.2-alpine
