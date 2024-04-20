@@ -13,7 +13,7 @@ services:
     ports:
       - 8081:8081
   keycloak:
-    image: nbittich/keycloak:latest
+    #  image: nbittich/keycloak:latest
     env_file:
       - ./env-files/dev/keycloak.env
     user:

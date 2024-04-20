@@ -18,13 +18,13 @@ services:
       - ./data/keycloak-postgres:/var/lib/postgresql/data
   keycloak:
     restart: always
-    image: nbittich/keycloak:23.0.7
+    image: nbittich/keycloak:24.0.2
     networks:
       artcoded:
     command: start --optimized
   ####### Redis #######
   redis:
-    image: redis:7-alpine
+    image: valkey/valkey:7.2-alpine
     restart: always
     networks:
       artcoded:
@@ -119,6 +119,15 @@ services:
       - ./data/prometheus:/prometheus
     depends_on:
       - keycloak
+    networks:
+      artcoded:
+  ###### Yopass ######
+  yopass:
+    image: jhaals/yopass
+    restart: always
+    command: "--database=redis --redis=redis://redis:6379 --port 80"
+    depends_on:
+      - redis
     networks:
       artcoded:
   ###### Nextcloud ######
