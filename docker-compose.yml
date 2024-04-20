@@ -71,7 +71,7 @@ services:
       - ./config/scripts:/var/artcoded_scripts
   ####### BACK OFFICE #######
   back-office:
-    image: nbittich/back-office:v2024.1.7
+    image: nbittich/back-office:v2024.1.8
     restart: always
     networks:
       artcoded:
