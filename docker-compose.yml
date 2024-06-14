@@ -58,7 +58,7 @@ services:
       - ./config/gateway:/usr/config
   ####### Api Backend #######
   api-backend:
-    image: nbittich/api-backend:2024.4.2
+    image: nbittich/api-backend:2024.4.3
     restart: always
     networks:
       artcoded:
