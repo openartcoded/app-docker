@@ -44,7 +44,7 @@ services:
     user: root
   ####### Api Gateway #######
   api-gateway:
-    image: nbittich/api-gateway:2024.1.0
+    image: nbittich/api-gateway:2024.1.1
     restart: always
     networks:
       artcoded:
@@ -58,7 +58,7 @@ services:
       - ./config/gateway:/usr/config
   ####### Api Backend #######
   api-backend:
-    image: nbittich/api-backend:2024.4.1
+    image: nbittich/api-backend:2024.4.2
     restart: always
     networks:
       artcoded:
@@ -80,7 +80,7 @@ services:
   triplestore:
     networks:
       artcoded:
-    image: nbittich/triplestore:2024.1.0
+    image: nbittich/triplestore:2024.1.1
     restart: always
     volumes:
       - openj9cache:/opt/shareclasses
