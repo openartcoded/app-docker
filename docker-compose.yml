@@ -70,7 +70,7 @@ services:
       - ./config/scripts:/var/artcoded_scripts
   ####### BACK OFFICE #######
   back-office:
-    image: nbittich/back-office:v2024.2.0
+    image: nbittich/back-office:v2024.2.1
     restart: always
     networks:
       artcoded:
@@ -88,7 +88,7 @@ services:
       - ./data/migrations:/migrations
   ####### Website #######
   website:
-    image: nbittich/websitev2:v2024.0.4
+    image: nbittich/websitev2:v2024.1.0
     restart: always
     networks:
       artcoded:
