@@ -88,7 +88,7 @@ services:
       - ./data/migrations:/migrations
   ####### Website #######
   website:
-    image: nbittich/websitev2:v2024.1.0
+    image: nbittich/websitev2:v2024.1.1
     restart: always
     networks:
       artcoded:
