@@ -11,6 +11,7 @@ gateway-prod.yml
 gateway_prod.yml
 prometheus_prod.yml
 
+config/sftp/prod/**
 config/s3-sync/**
 config/keycloak-prod/**
 config/letsencrypt/certbot/**

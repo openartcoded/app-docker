@@ -1,159 +1,170 @@
 services:
-  ####### MongoDB #######
-  mongo:
-    image: mongo:6
-    networks:
-      artcoded:
-    restart: always
-    volumes:
-      - ./data/db:/data/db
-  ####### Keycloak #######
-  postgresql:
-    restart: always
-    networks:
-      artcoded:
-    image: "postgres:14"
-    volumes:
-      - ./data/keycloak-postgres:/var/lib/postgresql/data
-  keycloak:
-    restart: always
-    image: nbittich/keycloak:24.0.2
-    networks:
-      artcoded:
-    command: start --optimized --proxy-headers xforwarded
-  ####### Redis #######
-  redis:
-    image: valkey/valkey:7.2-alpine
-    restart: always
-    networks:
-      artcoded:
-    command: redis-server  --appendonly yes
-    volumes:
-      - ./data/redis:/data
-  ####### Artemis #######
-  artemis:
-    image: nbittich/artemis:2.32.0
-    networks:
-      artcoded:
-    restart: always
-    volumes:
-      - ./config/artemis/login.config:/var/lib/artemis-instance/etc/login.config
-      - ./config/artemis/broker.xml:/var/lib/artemis-instance/etc/broker.xml
-      - ./data/artemis:/var/lib/artemis-instance/data
-      - ./data/artemis/journal:/var/lib/artemis-instance/data/journal
-    user: root
-  ####### Api Gateway #######
-  api-gateway:
-    image: nbittich/api-gateway:2024.1.1
-    restart: always
-    networks:
-      artcoded:
-    depends_on:
-      - api-backend
-      - back-office
-      - website
-      - triplestore
-    volumes:
-      - openj9cache:/opt/shareclasses
-      - ./config/gateway:/usr/config
-  ####### Api Backend #######
-  api-backend:
-    image: nbittich/api-backend:2024.4.4
-    restart: always
-    networks:
-      artcoded:
-    volumes:
-      - openj9cache:/opt/shareclasses
-      - ./data/backend:/var/artcoded/data
-      - ./data/backend/temp:/var/undertow/upload
-      - ./config/backend:/usr/config
-      - ./config/scripts:/var/artcoded_scripts
-  ####### BACK OFFICE #######
-  back-office:
-    image: nbittich/back-office:v2024.3.3
-    restart: always
-    networks:
-      artcoded:
-    volumes:
-      - ./config/back-office/nginx.conf:/etc/nginx/nginx.conf
-  ####### Triplestore #######
-  triplestore:
-    networks:
-      artcoded:
-    image: nbittich/triplestore:2024.1.1
-    restart: always
-    volumes:
-      - openj9cache:/opt/shareclasses
-      - ./data/tdb2:/triplestore
-      - ./data/migrations:/migrations
-  ####### Website #######
-  website:
-    image: nbittich/websitev2:2025.0.2
-    restart: always
-    networks:
-      artcoded:
-  ####### Graphana #######
-  grafana:
-    restart: unless-stopped
-    image: grafana/grafana:10.2.2
-    networks:
-      artcoded:
-    volumes:
-      - ./data/grafana:/var/lib/grafana
+    ####### MongoDB #######
+    mongo:
+        image: mongo:6
+        networks:
+            artcoded:
+        restart: always
+        volumes:
+            - ./data/db:/data/db
+    ####### Keycloak #######
+    postgresql:
+        restart: always
+        networks:
+            artcoded:
+        image: "postgres:14"
+        volumes:
+            - ./data/keycloak-postgres:/var/lib/postgresql/data
+    keycloak:
+        restart: always
+        image: nbittich/keycloak:24.0.2
+        networks:
+            artcoded:
+        command: start --optimized --proxy-headers xforwarded
+    ####### Redis #######
+    redis:
+        image: valkey/valkey:7.2-alpine
+        restart: always
+        networks:
+            artcoded:
+        command: redis-server  --appendonly yes
+        volumes:
+            - ./data/redis:/data
+    ####### Artemis #######
+    artemis:
+        image: nbittich/artemis:2.32.0
+        networks:
+            artcoded:
+        restart: always
+        volumes:
+            - ./config/artemis/login.config:/var/lib/artemis-instance/etc/login.config
+            - ./config/artemis/broker.xml:/var/lib/artemis-instance/etc/broker.xml
+            - ./data/artemis:/var/lib/artemis-instance/data
+            - ./data/artemis/journal:/var/lib/artemis-instance/data/journal
+        user: root
+    ####### Api Gateway #######
+    api-gateway:
+        image: nbittich/api-gateway:2024.1.1
+        restart: always
+        networks:
+            artcoded:
+        depends_on:
+            - api-backend
+            - back-office
+            - website
+            - triplestore
+        volumes:
+            - openj9cache:/opt/shareclasses
+            - ./config/gateway:/usr/config
+    ####### Api Backend #######
+    api-backend:
+        image: nbittich/api-backend:2024.4.4
+        restart: always
+        networks:
+            artcoded:
+        volumes:
+            - openj9cache:/opt/shareclasses
+            - ./data/backend:/var/artcoded/data
+            - ./data/backend/temp:/var/undertow/upload
+            - ./config/backend:/usr/config
+            - ./config/scripts:/var/artcoded_scripts
+        depends_on:
+            - sftp
+    ####### BACK OFFICE #######
+    back-office:
+        image: nbittich/back-office:v2024.3.3
+        restart: always
+        networks:
+            artcoded:
+        volumes:
+            - ./config/back-office/nginx.conf:/etc/nginx/nginx.conf
+    ####### Triplestore #######
+    triplestore:
+        networks:
+            artcoded:
+        image: nbittich/triplestore:2024.1.1
+        restart: always
+        volumes:
+            - openj9cache:/opt/shareclasses
+            - ./data/tdb2:/triplestore
+            - ./data/migrations:/migrations
+    ####### Website #######
+    website:
+        image: nbittich/websitev2:2025.0.2
+        restart: always
+        networks:
+            artcoded:
+    ####### Graphana #######
+    grafana:
+        restart: unless-stopped
+        image: grafana/grafana:10.2.2
+        networks:
+            artcoded:
+        volumes:
+            - ./data/grafana:/var/lib/grafana
 
-  ####### Node Exporter #######
-  node-exporter:
-    image: prom/node-exporter:latest
-    container_name: monitoring_node_exporter
-    restart: unless-stopped
-    networks:
-      artcoded:
-    expose:
-      - 9100
-  ####### Prometheus #######
-  prometheus:
-    restart: unless-stopped
-    image: prom/prometheus:v2.48.1
-    volumes:
-      - ./data/prometheus:/prometheus
-    depends_on:
-      - keycloak
-    networks:
-      artcoded:
-  ###### Yopass ######
-  yopass:
-    image: jhaals/yopass
-    restart: always
-    command: "--database=redis --redis=redis://redis:6379 --port 80"
-    depends_on:
-      - redis
-    networks:
-      artcoded:
-  ###### Nextcloud ######
-  cloud:
-    restart: always
-    image: nextcloud:28-fpm-alpine
-    volumes:
-      - ./data/nextcloud:/var/www/html
-    depends_on:
-      - postgresql
-      - redis
-    networks:
-      artcoded:
-  cloud-cron:
-    image: nextcloud:28-fpm-alpine
-    restart: always
-    volumes:
-      - ./../nextcloud-data:/var/www/html
-    entrypoint: /cron.sh
-    networks:
-      artcoded:
-    depends_on:
-      - postgresql
-      - redis
-      - cloud
+    ####### Node Exporter #######
+    node-exporter:
+        image: prom/node-exporter:latest
+        container_name: monitoring_node_exporter
+        restart: unless-stopped
+        networks:
+            artcoded:
+        expose:
+            - 9100
+    ####### SFTP       #######
+    sftp:
+        networks:
+            artcoded:
+        image: atmoz/sftp:alpine
+        volumes:
+            - ./data/peppol/ftp/invoices:/home/peppol/invoices
+            - ./data/peppol/ftp/expenses/:/home/peppol/expenses
+        command: peppol::1001
+    ####### Prometheus #######
+    prometheus:
+        restart: unless-stopped
+        image: prom/prometheus:v2.48.1
+        volumes:
+            - ./data/prometheus:/prometheus
+        depends_on:
+            - keycloak
+        networks:
+            artcoded:
+    ###### Yopass ######
+    yopass:
+        image: jhaals/yopass
+        restart: always
+        command: "--database=redis --redis=redis://redis:6379 --port 80"
+        depends_on:
+            - redis
+        networks:
+            artcoded:
+    ###### Nextcloud ######
+    cloud:
+        restart: always
+        image: nextcloud:28-fpm-alpine
+        volumes:
+            - ./data/nextcloud:/var/www/html
+        depends_on:
+            - postgresql
+            - redis
+        networks:
+            artcoded:
+    cloud-cron:
+        image: nextcloud:28-fpm-alpine
+        restart: always
+        volumes:
+            - ./../nextcloud-data:/var/www/html
+        entrypoint: /cron.sh
+        networks:
+            artcoded:
+        depends_on:
+            - postgresql
+            - redis
+            - cloud
 
 volumes:
-  openj9cache:
+    openj9cache:
 networks:
-  artcoded:
+    artcoded:
