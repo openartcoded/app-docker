@@ -17,7 +17,7 @@ services:
             - ./data/keycloak-postgres:/var/lib/postgresql/data
     keycloak:
         restart: always
-        image: nbittich/keycloak:24.0.2
+        image: nbittich/keycloak:26.4.0
         networks:
             artcoded:
         command: start --optimized --proxy-headers xforwarded
@@ -44,7 +44,7 @@ services:
         user: root
     ####### Api Gateway #######
     api-gateway:
-        image: nbittich/api-gateway:2024.1.1
+        image: nbittich/api-gateway:2026.0.1
         restart: always
         networks:
             artcoded:
@@ -82,7 +82,7 @@ services:
     triplestore:
         networks:
             artcoded:
-        image: nbittich/triplestore:2024.1.1
+        image: nbittich/triplestore:2026.0.0
         restart: always
         volumes:
             - openj9cache:/opt/shareclasses
@@ -90,7 +90,7 @@ services:
             - ./data/migrations:/migrations
     ####### Website #######
     website:
-        image: nbittich/websitev2:2025.0.2
+        image: nbittich/websitev2:2026.0.0
         restart: always
         networks:
             artcoded:
@@ -143,7 +143,7 @@ services:
     ###### Nextcloud ######
     cloud:
         restart: always
-        image: nextcloud:28-fpm-alpine
+        image: nextcloud:31-fpm-alpine
         volumes:
             - ./data/nextcloud:/var/www/html
         depends_on:
@@ -152,7 +152,7 @@ services:
         networks:
             artcoded:
     cloud-cron:
-        image: nextcloud:28-fpm-alpine
+        image: nextcloud:31-fpm-alpine
         restart: always
         volumes:
             - ./../nextcloud-data:/var/www/html
