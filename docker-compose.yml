@@ -65,7 +65,7 @@ services:
         networks:
             artcoded:
         volumes:
-            - openj9cache:/opt/shareclasses
+            # - openj9cache:/opt/shareclasses
             - ./data/backend:/var/artcoded/data
             - ./data/backend/temp:/var/undertow/upload
             - ./config/backend:/usr/config
