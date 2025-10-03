@@ -118,7 +118,7 @@ services:
     sftp:
         networks:
             artcoded:
-        image: atmoz/sftp:alpine
+        image: nbittich/sftp:2026.0.0
         volumes:
             - ./data/peppol/ftp/invoices:/home/peppol/invoices
             - ./data/peppol/ftp/expenses/:/home/peppol/expenses
