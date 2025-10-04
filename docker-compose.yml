@@ -46,7 +46,7 @@ services:
         user: root
     ####### Api Gateway #######
     api-gateway:
-        image: nbittich/api-gateway:2026.0.2
+        image: nbittich/api-gateway:2026.0.3
         restart: always
         networks:
             artcoded:
@@ -82,7 +82,7 @@ services:
     triplestore:
         networks:
             artcoded:
-        image: nbittich/triplestore:2026.0.1
+        image: nbittich/triplestore:2026.0.2
         restart: always
         volumes:
             - ./data/tdb2:/triplestore
