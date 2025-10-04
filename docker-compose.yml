@@ -56,7 +56,6 @@ services:
             - website
             - triplestore
         volumes:
-            - openj9cache:/opt/shareclasses
             - ./config/gateway:/usr/config
     ####### Api Backend #######
     api-backend:
@@ -65,7 +64,6 @@ services:
         networks:
             artcoded:
         volumes:
-            # - openj9cache:/opt/shareclasses
             - ./data/backend:/var/artcoded/data
             - ./data/backend/temp:/var/undertow/upload
             - ./config/backend:/usr/config
@@ -87,7 +85,6 @@ services:
         image: nbittich/triplestore:2026.0.1
         restart: always
         volumes:
-            - openj9cache:/opt/shareclasses
             - ./data/tdb2:/triplestore
             - ./data/migrations:/migrations
     ####### Website #######
@@ -166,7 +163,5 @@ services:
             - redis
             - cloud
 
-volumes:
-    openj9cache:
 networks:
     artcoded:
