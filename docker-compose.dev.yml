@@ -96,6 +96,7 @@ services:
             - ./config/tlsproxy/http:/etc/nginx/conf.d
             - ./config/tlsproxy/tcp:/etc/nginx/tcpconf.d
             - ./config/tlsproxy/nginx.conf:/etc/nginx/nginx.conf
+            - ./config/tlsproxy/mime.types:/etc/nginx/mime.types
             - ./data/nextcloud:/var/www/html
 
     triplestore:
