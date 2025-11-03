@@ -4,7 +4,12 @@ services:
             - "2222:22"
         volumes:
             - ./data/sftp/dev/ssh_host_keys.pub:/home/peppol/.ssh/keys/id_rsa.pub:ro
-
+    file-service:
+        image: nbittich/file-service:latest
+        env_file:
+            - ./env-files/dev/file-service.env
+        ports:
+            - "8089:80"
     postgresql:
         env_file:
             - ./env-files/dev/postgresql.env
@@ -35,6 +40,8 @@ services:
             # - ./config/keycloak-dev:/tmp/realms
     api-backend:
         image: nbittich/api-backend:latest
+        #build:
+        #  context: /home/nbittich/sideprojects/openartcoded/monorepo/backend/.
         volumes:
             - ./data/sftp/dev/ssh_host_keys:/peppol/id_rsa:ro
         ports:
