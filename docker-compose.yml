@@ -82,7 +82,7 @@ services:
             - sftp
     ####### BACK OFFICE #######
     back-office:
-        image: nbittich/back-office:v2026.3.0
+        image: nbittich/back-office:v2026.3.1
         restart: always
         networks:
             artcoded:
