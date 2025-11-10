@@ -33,6 +33,10 @@ services:
     ####### New file service #######
     file-service:
         image: nbittich/file-service:2026.0.0
+        environment:
+            TMP_FS_PATH: "/temporary"
+        tmpfs:
+            - /temporary:size=1024m
         volumes:
             - ./data/backend/files:/astorage
         networks:
@@ -72,7 +76,7 @@ services:
         networks:
             artcoded:
         tmpfs:
-            - /temporary:size=100m
+            - /temporary:size=1024m
         volumes:
             - ./data/backend:/var/artcoded/data
             - ./data/backend/temp:/var/undertow/upload
