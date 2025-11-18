@@ -71,7 +71,7 @@ services:
             - ./config/gateway:/usr/config
     ####### Api Backend #######
     api-backend:
-        image: nbittich/api-backend:2026.5.4
+        image: nbittich/api-backend:2026.5.5
         restart: always
         networks:
             artcoded:
@@ -86,7 +86,7 @@ services:
             - sftp
     ####### BACK OFFICE #######
     back-office:
-        image: nbittich/back-office:v2026.5.4
+        image: nbittich/back-office:v2026.5.5
         restart: always
         networks:
             artcoded:
