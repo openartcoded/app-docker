@@ -40,8 +40,6 @@ services:
             # - ./config/keycloak-dev:/tmp/realms
     api-backend:
         image: nbittich/api-backend:latest
-        #build:
-        #  context: /home/nbittich/sideprojects/openartcoded/monorepo/backend/.
         volumes:
             - ./data/sftp/dev/ssh_host_keys:/peppol/id_rsa:ro
         ports:
