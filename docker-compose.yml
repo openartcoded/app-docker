@@ -103,7 +103,7 @@ services:
             - ./data/migrations:/migrations
     ####### Website #######
     website:
-        image: nbittich/websitev2:2026.0.0
+        image: nbittich/websitev2:2026.0.1
         restart: always
         networks:
             artcoded:
