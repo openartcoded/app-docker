@@ -32,7 +32,7 @@ services:
             - ./data/redis:/data
     ####### New file service #######
     file-service:
-        image: nbittich/file-service:2026.1.6
+        image: nbittich/file-service:2026.2.0
         environment:
             TMP_FS_PATH: "/temporary"
         tmpfs:
