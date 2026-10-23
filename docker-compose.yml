@@ -30,6 +30,23 @@ services:
     command: redis-server  --appendonly yes
     volumes:
       - ./data/redis:/data
+  ####### File Search #######
+  file-search:
+    image: nbittich/file-search:latest
+    restart: always
+    networks:
+      artcoded:
+    environment:
+      UPLOAD_DIR: /uploads
+      INGEST_STATE_DIR: /app/state
+      INDEX_DIR_PATH: /index
+      UPLOAD_SCAN_INTERVAL_SECS: 10
+    volumes:
+      - ./data/backend/files:/uploads:ro
+      - ./data/file-search/state:/app/state
+      - ./data/file-search/index:/index
+    expose:
+      - "8080"
   ####### New file service #######
   file-service:
     image: nbittich/file-service:2026.2.0
@@ -71,7 +88,7 @@ services:
       - ./config/gateway:/usr/config
   ####### Api Backend #######
   api-backend:
-    image: nbittich/api-backend:2026.6.2
+    image: nbittich/api-backend:2026.6.3
     restart: always
     networks:
       artcoded:
@@ -86,7 +103,7 @@ services:
       - sftp
   ####### BACK OFFICE #######
   back-office:
-    image: nbittich/back-office:v2026.6.1
+    image: nbittich/back-office:v2026.6.2
     restart: always
     networks:
       artcoded:
