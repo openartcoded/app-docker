@@ -88,7 +88,7 @@ services:
       - ./config/gateway:/usr/config
   ####### Api Backend #######
   api-backend:
-    image: nbittich/api-backend:2026.6.3
+    image: nbittich/api-backend:2026.6.4
     restart: always
     networks:
       artcoded:
@@ -101,6 +101,15 @@ services:
       - ./config/scripts:/var/artcoded_scripts
     depends_on:
       - sftp
+  ####### BACK OFFICE V2 #######
+  back-officev2:
+    image: nbittich/openartcoded-backoffice:2027.0.0
+    restart: always
+    networks:
+      artcoded:
+    volumes:
+      - ./config/back-office/nginx.conf:/etc/nginx/nginx.conf
+
   ####### BACK OFFICE #######
   back-office:
     image: nbittich/back-office:v2026.6.2

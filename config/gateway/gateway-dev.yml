@@ -22,21 +22,6 @@ spring:
                           uri: http://auth.somehost.org:8080
                           predicates:
                               - Host=auth.somehost.org
-                        ########################################################### back-office ######################################################################
-                        - id: back-office-api
-                          uri: http://api.somehost.org
-                          predicates:
-                              - Host=backoffice.somehost.org
-                              - Path=/api/**
-                        - id: back-office-sparql-endpoint
-                          uri: http://triplestore
-                          predicates:
-                              - Host=backoffice.somehost.org
-                              - Path=/sparql/**
-                        - id: back-office
-                          uri: http://backoffice.somehost.org
-                          predicates:
-                              - Host=backoffice.somehost.org
                         ########################################################### website #########################################################################
                         # - id: website-api
                         #   uri: http://api.somehost.org
@@ -54,3 +39,29 @@ spring:
                           uri: http://somehost.org
                           predicates:
                               - Host=somehost.org
+                ########################################################### back-office ######################################################################
+                        - id: back-office-api
+                          uri: http://api.somehost.org
+                          order: -1
+                          predicates:
+                            - Host=backoffice.somehost.org,v2.backoffice.somehost.org
+                            - Path=/api/**
+
+                        - id: back-office-sparql-endpoint
+                          uri: http://triplestore
+                          order: -1
+                          predicates:
+                            - Host=backoffice.somehost.org,v2.backoffice.somehost.org
+                            - Path=/sparql/**
+
+                        - id: back-office
+                          uri: http://back-office
+                          order: 0
+                          predicates:
+                            - Host=backoffice.somehost.org
+
+                        - id: back-office-v2
+                          uri: http://back-officev2
+                          order: 0
+                          predicates:
+                            - Host=v2.backoffice.somehost.org
