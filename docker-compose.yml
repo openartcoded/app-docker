@@ -112,7 +112,7 @@ services:
 
   ####### BACK OFFICE #######
   back-office:
-    image: nbittich/back-office:v2026.6.2
+    image: nbittich/back-office:v2026.6.3
     restart: always
     networks:
       artcoded:
