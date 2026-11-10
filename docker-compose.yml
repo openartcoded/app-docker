@@ -153,9 +153,13 @@ services:
       - 9100
   ####### SFTP       #######
   sftp:
+    cap_add:
+      - NET_ADMIN
+    environment:
+      FAIL2BAN: "true"   # optional
     networks:
       artcoded:
-    image: nbittich/sftp:2026.0.0
+    image: nbittich/sftp:2027.0.0
     volumes:
       - ./data/peppol/ftp/invoices:/home/peppol/invoices
       - ./data/peppol/ftp/expenses/:/home/peppol/expenses
