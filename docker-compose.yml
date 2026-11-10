@@ -32,7 +32,7 @@ services:
       - ./data/redis:/data
   ####### File Search #######
   file-search:
-    image: nbittich/file-search:latest
+    image: nbittich/file-search:2027.0.0
     restart: always
     networks:
       artcoded:
@@ -88,7 +88,7 @@ services:
       - ./config/gateway:/usr/config
   ####### Api Backend #######
   api-backend:
-    image: nbittich/api-backend:2027.2.1
+    image: nbittich/api-backend:2027.3.0
     restart: always
     networks:
       artcoded:
@@ -103,7 +103,7 @@ services:
       - sftp
   ####### BACK OFFICE V2 #######
   back-officev2:
-    image: nbittich/openartcoded-backoffice:v2027.2.1
+    image: nbittich/openartcoded-backoffice:v2027.3.0
     restart: always
     networks:
       artcoded:
