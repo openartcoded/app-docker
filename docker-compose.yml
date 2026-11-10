@@ -1,7 +1,7 @@
 services:
   ####### MongoDB #######
   mongo:
-    image: mongo:8.0
+    image: mongo:8
     networks:
       artcoded:
     restart: always
@@ -75,7 +75,7 @@ services:
     user: root
   ####### Api Gateway #######
   api-gateway:
-    image: nbittich/api-gateway:2026.1.0
+    image: nbittich/api-gateway:2027.0.0
     restart: always
     networks:
       artcoded:
@@ -122,7 +122,7 @@ services:
   triplestore:
     networks:
       artcoded:
-    image: nbittich/triplestore:2026.1.0
+    image: nbittich/triplestore:2027.0.0
     restart: always
     volumes:
       - ./data/tdb2:/triplestore
