@@ -88,7 +88,7 @@ services:
       - ./config/gateway:/usr/config
   ####### Api Backend #######
   api-backend:
-    image: nbittich/api-backend:2027.2.0
+    image: nbittich/api-backend:2027.2.1
     restart: always
     networks:
       artcoded:
@@ -103,7 +103,7 @@ services:
       - sftp
   ####### BACK OFFICE V2 #######
   back-officev2:
-    image: nbittich/openartcoded-backoffice:v2027.2.0
+    image: nbittich/openartcoded-backoffice:v2027.2.1
     restart: always
     networks:
       artcoded:
