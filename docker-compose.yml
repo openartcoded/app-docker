@@ -186,7 +186,7 @@ services:
   ###### Nextcloud ######
   cloud:
     restart: always
-    image: nextcloud:31-fpm-alpine
+    image: nextcloud:35-fpm-alpine
     volumes:
       - ./data/nextcloud:/var/www/html
     depends_on:
@@ -195,7 +195,7 @@ services:
     networks:
       artcoded:
   cloud-cron:
-    image: nextcloud:31-fpm-alpine
+    image: nextcloud:35-fpm-alpine
     restart: always
     volumes:
       - ./../nextcloud-data:/var/www/html
