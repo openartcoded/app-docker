@@ -103,7 +103,7 @@ services:
       - sftp
   ####### BACK OFFICE V2 #######
   back-officev2:
-    image: nbittich/openartcoded-backoffice:v2027.5.0
+    image: nbittich/openartcoded-backoffice:v2027.6.0
     restart: always
     networks:
       artcoded:
