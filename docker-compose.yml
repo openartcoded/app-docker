@@ -12,9 +12,9 @@ services:
     restart: always
     networks:
       artcoded:
-    image: "postgres:14"
+    image: "postgres:18"
     volumes:
-      - ./data/keycloak-postgres:/var/lib/postgresql/data
+      - ./data/keycloak-postgres-18:/var/lib/postgresql
   keycloak:
     restart: always
     image: nbittich/keycloak:26.8.2
@@ -136,7 +136,7 @@ services:
   ####### Graphana #######
   grafana:
     restart: unless-stopped
-    image: grafana/grafana:10.2.2
+    image: grafana/grafana:13.3.1
     networks:
       artcoded:
     volumes:
@@ -167,7 +167,7 @@ services:
   ####### Prometheus #######
   prometheus:
     restart: unless-stopped
-    image: prom/prometheus:v2.48.1
+    image: prom/prometheus:v3.13.5
     volumes:
       - ./data/prometheus:/prometheus
     depends_on:
