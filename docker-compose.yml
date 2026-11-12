@@ -216,7 +216,8 @@ services:
     entrypoint: ["tail", "-f", "/dev/null"]
     init: true
     networks:
-      artcoded:
+      cli: # has to run outside the bo network
 
 networks:
   artcoded:
+  cli:
