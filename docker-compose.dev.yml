@@ -152,6 +152,12 @@ services:
     env_file:
       - ./env-files/dev/roundcube.env
 
+  cli:
+    image: nbittich/artcoded-cli:latest
+    env_file:
+      - ./env-files/dev/cli.env
+    volumes:
+      - ./datacli:/data
   cloud-cron:
     env_file:
       - ./env-files/dev/cloud.env

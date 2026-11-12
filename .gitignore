@@ -25,3 +25,7 @@ config/artemis/keycloak-prod.json
 .env
 
 /env-files/prod/**
+
+# artcoded cli: configuration, tokens (and the whatsapp session)
+/datacli/**
+/config/cli/**
