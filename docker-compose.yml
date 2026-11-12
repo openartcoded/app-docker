@@ -210,10 +210,10 @@ services:
   # the cli of the backoffice: docker compose exec cli artcoded <command>
   # (later the whatsapp bot). Configuration and tokens in /data.
   cli:
-    image: nbittich/artcoded-cli:v2027.0.5
+    image: nbittich/artcoded-cli:v2027.0.6
     restart: always
     # stays up for docker compose exec (no command of its own yet)
-    entrypoint: ["tail", "-f", "/dev/null"]
+    command: ["bot"]
     init: true
     networks:
       cli: # has to run outside the bo network
